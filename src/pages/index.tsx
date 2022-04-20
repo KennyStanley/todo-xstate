@@ -7,6 +7,7 @@ export default function Home() {
   const [state, send] = useMachine(todoMachine, {
     services: {
       loadTodos: async () => {
+        // throw new Error('Oh noooo!')
         return ['Take out trash', 'Walk the dog']
       },
     },
@@ -15,7 +16,10 @@ export default function Home() {
     <>
       <main data-testid="index">
         <div className="h-screen flex flex-col justify-center align-middle text-center">
-          <div>{JSON.stringify(state.value)}</div>
+          <div>
+            <pre>{JSON.stringify(state.value)}</pre>
+            <pre>{JSON.stringify(state.context)}</pre>
+          </div>
         </div>
       </main>
     </>

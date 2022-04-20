@@ -1,49 +1,35 @@
 import { createMachine } from 'xstate'
 
 const todoMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQA2quEZUaGsAxMgPIAi7AypgDLsAgpwCinRKAAOqWMQAuxVKUkgAHogBMAVk0UADAE4AHADZtAFgCMN7Vc2HDAGhABPRIYDsFC48efjT09TGwBmUwBfCJcmLDwiMkoaOgZY1kERAEkAOQBxTA5uPgAxIUz+cVUZOUVlVQ0ETU0rClNjC21AhxCLUyaXdwQrQ20KbVDtSytjHUngqJj0OIIScmpaelJGJdhi3GIqSBYAJVFkY4BNAWFOAq5eKtkFJRUkdUQrUNbjT9DrDps+lC7QGHxGYwmujsVm0+k0QSi0RApHQcFUsRwK0S6xSWzSjxqL3qiAsmlBCEMLX01Op8MMoX07SskSRGPiq0o8h2-A2kAJzzqbwaFl8Pj6I082lMQIskvJlIMNLhnnpjOsLMWGExCTWyU222YewOfLe1QFr1ADWGen0ktCzPtmn0U3JDi+ttCI00IuBITMCxAbKx5H5tQt7wQAForPoKPazOZjJZjMZDCFTOTpoiIkA */
-  createMachine(
-    {
-      id: 'Todo Machine',
-      initial: 'loadingTodos',
-      schema: {
-        events: {} as
-          | { type: 'TODOS LOADED'; todos: string[] }
-          | { type: 'LOADING TODOS FAILED'; errorMessage: string }
-          | { type: 'RETRY LOAD TODOS' }
-          | { type: 'TODO ADDED' }
-          | { type: 'TODO REMOVED' },
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQA2quEZUaGsAxBuRWQG6oDWlTLHiJlKNOg0GwE3VPlwAXYqlIBtAAwBdRKAAOqWMSUqdIAB6IAjAHYKAVgAs1gJzO7zh5YBs1gEzW7XwAaEABPRGcADgpIgGYHL19IyOt1L1i3ZwBfLJDBHAISDnF6UkZ0AxYwACdq1GqKXSpFADN6gFsKfOEisVpS8uYZUh55YzUtU31DcdMLBEtnCnUHSPVLSwc3dVjY9TsQ8IXIywprbzj1k8tIuztrHNyQUnQ4U27C0Wp+yQr4JBA0yMylIc0QAFpfN4KF4Ur47JFYX4EdZDlZLOp7M5fF47jtfM5EricnkKgURBwFH8ADL9SBTAzAkwA+a+FZnNypSwIuyxawOBwHMIRXwUXYJNmxRFRW6xEkgD4UvoSMpSABiuGIVHpAKBsxZiDZdnsONi3gCXmc6msuLRCwCFChsK86mc1lilthDnlit6DJmILBCEhDkxSPhiLhKLtizF8USBPUaUS2MeWSAA */
+  createMachine({
+    tsTypes: {} as import('./todoMachine.typegen').Typegen0,
+    schema: {
+      services: {} as {
+        loadTodos: { data: string[] }
       },
-      tsTypes: {} as import('./todoMachine.typegen').Typegen0,
-      states: {
-        loadingTodos: {
-          on: {
-            'TODOS LOADED': {
+    },
+    id: 'Todo Machine',
+    initial: 'loadingTodos',
+    states: {
+      loadingTodos: {
+        invoke: {
+          src: 'loadTodos',
+          onDone: [
+            {
               target: 'todosLoaded',
-              actions: 'consoleLogTodos',
             },
-            'LOADING TODOS FAILED': {
+          ],
+          onError: [
+            {
               target: 'loadingTodosFailed',
             },
-          },
-        },
-        todosLoaded: {},
-        loadingTodosFailed: {
-          on: {
-            'RETRY LOAD TODOS': {
-              target: 'loadingTodos',
-            },
-          },
+          ],
         },
       },
+      todosLoaded: {},
+      loadingTodosFailed: {},
     },
-    {
-      actions: {
-        consoleLogTodos: (context, event) => {
-          alert(JSON.stringify(event.todos))
-        },
-      },
-    },
-  )
+  })
 
 export default todoMachine

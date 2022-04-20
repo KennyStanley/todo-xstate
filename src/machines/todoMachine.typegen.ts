@@ -2,20 +2,22 @@
 
 export interface Typegen0 {
   '@@xstate/typegen': true
-  eventsCausingActions: {
-    consoleLogTodos: 'TODOS LOADED'
-  }
+  eventsCausingActions: {}
   internalEvents: {
     'xstate.init': { type: 'xstate.init' }
   }
-  invokeSrcNameMap: {}
+  invokeSrcNameMap: {
+    loadTodos: 'done.invoke.Todo Machine.loadingTodos:invocation[0]'
+  }
   missingImplementations: {
     actions: never
-    services: never
+    services: 'loadTodos'
     guards: never
     delays: never
   }
-  eventsCausingServices: {}
+  eventsCausingServices: {
+    loadTodos: 'xstate.init'
+  }
   eventsCausingGuards: {}
   eventsCausingDelays: {}
   matchesStates: 'loadingTodos' | 'todosLoaded' | 'loadingTodosFailed'

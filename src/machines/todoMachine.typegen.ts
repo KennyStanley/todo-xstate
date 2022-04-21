@@ -4,7 +4,11 @@ export interface Typegen0 {
   '@@xstate/typegen': true
   eventsCausingActions: {
     assignTodosToContext: 'done.invoke.Todo Machine.loadingTodos:invocation[0]'
-    assignErrorMessageToContext: 'error.platform.Todo Machine.loadingTodos:invocation[0]'
+    assignErrorMessageToContext:
+      | 'error.platform.Todo Machine.loadingTodos:invocation[0]'
+      | 'error.platform.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
+    assignFormInputToContext: 'FORM_INPUT_CHANGED'
+    clearFormInput: 'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
   }
   internalEvents: {
     'done.invoke.Todo Machine.loadingTodos:invocation[0]': {
@@ -16,22 +20,40 @@ export interface Typegen0 {
       type: 'error.platform.Todo Machine.loadingTodos:invocation[0]'
       data: unknown
     }
+    'error.platform.Todo Machine.creatingNewTodo.savingTodo:invocation[0]': {
+      type: 'error.platform.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
+      data: unknown
+    }
+    'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]': {
+      type: 'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
+      data: unknown
+      __tip: 'See the XState TS docs to learn how to strongly type this.'
+    }
     'xstate.init': { type: 'xstate.init' }
   }
   invokeSrcNameMap: {
     loadTodos: 'done.invoke.Todo Machine.loadingTodos:invocation[0]'
+    saveTodo: 'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
   }
   missingImplementations: {
     actions: never
-    services: 'loadTodos'
+    services: 'loadTodos' | 'saveTodo'
     guards: never
     delays: never
   }
   eventsCausingServices: {
-    loadTodos: 'xstate.init'
+    loadTodos: 'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
+    saveTodo: 'SUBMIT'
   }
   eventsCausingGuards: {}
   eventsCausingDelays: {}
-  matchesStates: 'loadingTodos' | 'todosLoaded' | 'loadingTodosFailed'
+  matchesStates:
+    | 'loadingTodos'
+    | 'todosLoaded'
+    | 'loadingTodosFailed'
+    | 'creatingNewTodo'
+    | 'creatingNewTodo.showingFormInput'
+    | 'creatingNewTodo.savingTodo'
+    | { creatingNewTodo?: 'showingFormInput' | 'savingTodo' }
   tags: never
 }

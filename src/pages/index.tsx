@@ -22,13 +22,17 @@ export default function Home() {
   })
   return (
     <>
-      <main data-testid="index">
+      <main data-testid="index" className="bg-slate-900 text-white">
         <div className="h-screen flex flex-col justify-center align-middle text-center">
-          <div>
+          <div className="flex w-full justify-center gap-2">
+            <b>State</b>
             <pre>{JSON.stringify(state.value)}</pre>
+          </div>
+          <div className="flex w-full justify-center gap-2">
+            <b>Context</b>
             <pre>{JSON.stringify(state.context)}</pre>
           </div>
-          <div className="mx-auto w-1/4 flex flex-col gap-2">
+          <div className="mt-4 mx-auto w-1/4 flex flex-col gap-2">
             {state.context.todos.map((todo, index) => (
               <TodoCard
                 key={index}
@@ -43,7 +47,7 @@ export default function Home() {
             {state.matches('todosLoaded') && (
               <button
                 onClick={() => send('ADD_TODO')}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mt-2 rounded-md"
               >
                 Add Todo
               </button>
@@ -57,7 +61,7 @@ export default function Home() {
               >
                 <input
                   onChange={(e) => send({ type: 'FORM_INPUT_CHANGED', value: e.target.value })}
-                  className="border-2"
+                  className="bg-slate-800 border-2 border-slate-700 rounded-md py-1 px-4 mt-2"
                 ></input>
               </form>
             )}
@@ -71,7 +75,7 @@ export default function Home() {
 const TodoCard = ({ todo, deleteTodo }: { todo: string; deleteTodo: any }) => {
   return (
     <div className="flex flex-col justify-center align-center">
-      <div className="bg-slate-100 border-2 rounded-md flex justify-between pl-4 pr-2 overflow-hidden">
+      <div className="bg-slate-800 border-2 border-slate-700 rounded-md flex justify-between pl-4 pr-2 py-1 overflow-hidden">
         {todo}
         <button onClick={deleteTodo}>
           <svg

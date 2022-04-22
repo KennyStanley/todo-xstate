@@ -16,6 +16,7 @@ export default function Home() {
         todos.add(context.createNewTodoFormInput)
       },
       deleteTodo: async (context, event) => {
+        throw new Error('Oh noooo!')
         todos.delete(event.todo)
       },
     },
@@ -32,17 +33,21 @@ export default function Home() {
             <b>Context</b>
             <pre>{JSON.stringify(state.context)}</pre>
           </div>
-          <div className="mt-4 mx-auto w-1/4 flex flex-col gap-2">
-            {state.context.todos.map((todo, index) => (
-              <TodoCard
-                key={index}
-                todo={todo}
-                deleteTodo={() => {
-                  send({ type: 'DELETE_TODO', todo })
-                }}
-              />
-            ))}
-          </div>
+          {state.matches('todosLoaded') && (
+            <>
+              <div className="mt-4 mx-auto w-1/4 flex flex-col gap-2">
+                {state.context.todos.map((todo, index) => (
+                  <TodoCard
+                    key={index}
+                    todo={todo}
+                    deleteTodo={() => {
+                      send({ type: 'DELETE_TODO', todo })
+                    }}
+                  />
+                ))}
+              </div>
+            </>
+          )}
           <div>
             {state.matches('todosLoaded') && (
               <button
@@ -51,6 +56,19 @@ export default function Home() {
               >
                 Add Todo
               </button>
+            )}
+            {state.matches('deletingTodoFailed') && (
+              <>
+                <p>
+                  <b>Something went wrong:</b> {state.context.errorMessage}
+                </p>
+                <button
+                  onClick={() => send({ type: 'SPEED_UP' })}
+                  className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mt-2 rounded-md"
+                >
+                  Go back to list
+                </button>
+              </>
             )}
             {state.matches('creatingNewTodo.showingFormInput') && (
               <form

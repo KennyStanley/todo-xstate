@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate'
 
 const todoMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQA2quEZUaGsAxBuRWQG6oDWlTLHiJlKNOg0GwE3VPlwAXYqlIBtAAwBdRKAAOqWMSUqdIAB6IATAE4AjBQCsAZluWAbAHYAHJfUAWLyc3ABoQAE9EQI8KdVj1X38vfz8AXxTQwRwCEg5xelJGdAMWMAAnUtRSil0qRQAzSoBbCkzhHLFafMLmGVIeeWM1LVN9Q0HTCwQndXtnV08fRKDQiIQHBy8Ka23tjz3LPydrBzSMoqyRDgUi2AAZTsgWAEEAEReAfWQAeRevkYMjMpSBNEJ5ol4PA4ZgcPIcnF4HCtIm4nBRAk4nH5rH4-G54uoTukQK1sqIKNdmPc6I8XgBRW605C0z4-P5IECjQEmdmTByWJEIawHGJxBIBZKnYnnNpk-ClMCKBgAOTAAHdBBRYIRUKqGAAxJoASVIugArgoWHqvgAlbDvQ1KgAKAFVkO8AMIACSeSoA4rSXv8xkCQQgvH51BRvNYZh5sRC7LYBQm0RinHzbLYY9YXJKSZdKHKFUoCir1UVNdrdQUDaVGsazRaAMrOgBC2ENyCDXOBPMQtnUbk2lkxmL8HgJtj2XgF1ghFDci6HDls6z8tgReelpI4RcVpbVGtguC4kiKbBUlFk-Ba24LFD3JagZaPJ7PGF6-UVKg02nZnPGPsphmRwXHcbxfACdNEXCUE5xFWIxSSHEtwwC52gfeV92fQ8K2PU8CkEEpykqapagUBo61vNCZV3LCnxfPC30IopPzkb8hj-PQAUA0BJgHIcKBHQ4cQnFdp1nWIFyXBFVwcddNyJfMMIgMAqDAJ8iPYK8+j4AQ7xUtSNPfVA2IGIFf27XjzCsDxUUOWEN3iBw9nWAUp2iHZdm2FdjjcVChB3ShVPUzTzzKCoqhqeommowL7xC4yWI-WRzJ-YZ-x4kMgMsOyKAchTnNcmDVhjLYvLjY4swcfzJVIdA4FMZSyTyEz4Ey4NuT4xA9gFFzUUsKFYjcVwXLsSwAvQskKQMKlVIgKzsu6hAsWiGrBssWx4T8DZ1CcZMXNTDF1hjBxsQ2SbaI6CRkoMPVcGIdSFo6ntQzXIS3BqvxLEWKCPD6jxLEcUVsT2uNvEuoLMOLZVcIwSsdX1I0TXNRaupssMdscbx1GxMSPOsWcPHsdF002rNcacCalIM2V6Nh8t4fwky0d7Zatt8LYh2J6x8Yk2DBQjCg03THEqpcjxIfvR8GcEVnQy8Ww3CjLwYyneM40zZNByOzEEXk7YUSlwzQpZl7rMmb73IJISsW8qq-ON0R5aAjd3M8rycRcXGvFVtI0iAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FUAICyBDAxgBYCWAdmAHQA2quEZUaGsAxBuRWQG6oDWlTLHiJlKNOg0GwE3VPlwAXYqlIBtAAwBdRKAAOqWMSUqdIAB6IATAE4AjBQCsAZluWAbAHYAHJfUAWLyc3ABoQAE9EQI8KdVj1X38vfz8AXxTQwRwCEg5xelJGdAMWMAAnUtRSil0qRQAzSoBbCkzhHLFafMLmGVIeeWM1LVN9Q0HTCwQndXtnV08fRKDQiIQHBy8Ka23tjz3LPydrBzSMoqyRDgUi2AAZTsgWAEEAEReAfWQAeRevkYMjMpSBNEJ5ol4PA4ZgcPIcnF4HCtIm4nBRAk4nH5rH4-G54uoTukQK1sqIKNdmPc6I8XgBRW605C0z4-P5IECjQEmdmTByWJEIawHGJxBIBZKnYnnNpk-ClMCKBgAOTAAHdBBRYIRUKqGAAxJoASVIugArgoWHqvgAlbDvQ1KgAKAFVkO8AMIACSeSoA4rSXv8xkCQQgvH51BRvNYZh5sRC7LYBQm0RinHzbLYY9YXJKSZdKHKFUoCir1UVNdrdQUDaVGsazRaAMrOgBC2ENyCDXOBPMQtnUbk2lkxmL8HgJtj2XgF1ghFDci6HDls6z8tgReelpI4RcVpbVGtguC4kiKbBUlFk-Ba24LFD3JagZaPJ7PGF6-UVKg02nZnPGPsphmRwXHcbxfACdNEXCUE5xFWIxSSHEtwwC52gfeV92fQ8K2PU8CkEEpykqapagUBo61vNCZV3LCnxfPC30IopPzkb8hj-PQAUA0BJgHIcKBHQ4cQnFdp1nWIFyXBFVwcddNyJfMMIgMAqDAJ8iPYK8+j4AQ7xUtSNPfVA2IGIFf27XjzCsDxUUOWEN3iBw9nWAUp2iHZdm2FdjjcVChB3ShVPUzTzzKCoqhqeommowL7xC4yWI-WRzJ-YZ-x4kMgMsOyKAchTnNcmDVhjLYvLjY4swcfylIMslErCjA9VwYh1IgFgm0dWkA3eZ1HSs7K+MQIVUWsOycxzA4vCnEJYIQAI-BiGwZpHFcCX8QkzhooKKEakyWrax4zFgBRFEoXA6gUMoAApLChdQAEoWGUhqjKa1BDvawbuWGhBYWsISPFXQd1BzYHDgFRblrnVx0wHKE-EJIlSHQOBTFe3JOhM+BMuDX6bP+jwBRc1F7riNxXBcuxLAC9CyQpAwqVUiAft7P6sWiGr7ssWx4SRpInGTFzUwxdYYwcbENjp2iOgkZKDC+yA2dDNchLcGq-EsRYoOJ+aXMsRxRWxdQnDjbwZd2x9lVwjBKx1fUjRNc0VaA8MHEcbwwfHSc9msWdgdF9NeazMGnFpuqdvva2D3LO38JM12-r53wtiHYHxt97xZwjCg03THEqpcjxLej+ibbj1Ak8Jma3CjLwYyneM40zZNByD4GPF5tx7tsUvDNCxO8Z7UMtfcgkhKxbyqr8-u3sHhWldZ4frMmYHUT5rwhzseFJYxcexq8wccQOSm+8j+L2mr-iZ3mqdyp2Hwm5XFFkZSIA */
   createMachine(
     {
       context: {
@@ -30,6 +30,9 @@ const todoMachine =
           | {
               type: 'DELETE_TODO'
               todo: string
+            }
+          | {
+              type: 'SPEED_UP'
             },
       },
       id: 'Todo Machine',
@@ -106,9 +109,21 @@ const todoMachine =
             onError: [
               {
                 actions: 'assignErrorMessageToContext',
-                target: 'loadingTodos',
+                target: 'deletingTodoFailed',
               },
             ],
+          },
+        },
+        deletingTodoFailed: {
+          after: {
+            '2500': {
+              target: 'todosLoaded',
+            },
+          },
+          on: {
+            SPEED_UP: {
+              target: 'todosLoaded',
+            },
           },
         },
       },

@@ -56,7 +56,6 @@ export interface Typegen0 {
     loadTodos:
       | 'done.invoke.Todo Machine.creatingNewTodo.savingTodo:invocation[0]'
       | 'done.invoke.Todo Machine.deletingTodo:invocation[0]'
-      | 'error.platform.Todo Machine.deletingTodo:invocation[0]'
     deleteTodo: 'DELETE_TODO'
     saveTodo: 'SUBMIT'
   }
@@ -70,6 +69,7 @@ export interface Typegen0 {
     | 'creatingNewTodo.showingFormInput'
     | 'creatingNewTodo.savingTodo'
     | 'deletingTodo'
+    | 'deletingTodoFailed'
     | { creatingNewTodo?: 'showingFormInput' | 'savingTodo' }
   tags: never
 }

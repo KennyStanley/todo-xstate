@@ -16,7 +16,7 @@ export default function Home() {
         todos.add(context.createNewTodoFormInput)
       },
       deleteTodo: async (context, event) => {
-        throw new Error('Oh noooo!')
+        // throw new Error('Oh noooo!')
         todos.delete(event.todo)
       },
     },

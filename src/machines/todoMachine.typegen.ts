@@ -59,7 +59,9 @@ export interface Typegen0 {
     deleteTodo: 'DELETE_TODO'
     saveTodo: 'SUBMIT'
   }
-  eventsCausingGuards: {}
+  eventsCausingGuards: {
+    hasTodos: 'done.invoke.Todo Machine.loadingTodos:invocation[0]'
+  }
   eventsCausingDelays: {}
   matchesStates:
     | 'loadingTodos'
